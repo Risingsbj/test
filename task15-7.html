@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            border: 1px solid #ccc;
+            margin: 20px;
+            padding: 40px 20px;
+        }
+        
+        .box {
+            margin: 0;
+            padding: 10px;
+            width: 300px;
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            background-color: orange;
+        }
+        
+        .btn {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ct">
+        <div>
+            <h2>当点击按钮时，背景色变为红色再变为蓝色</h2>
+            <button class="btn">点击变色</button>
+        </div>
+        <div class="box">
+            <p>滚动条距离窗口顶部的距离是：<span>0px</span></p>
+        </div>
+        <div class="div1">
+            <h2>当鼠标放置到$div 上，把$div 背景色改为红色，移出鼠标背景色变为白色</h2>
+
+        </div>
+        <div>
+            <h2>当鼠标激活 input 输入框时让输入框边框变为蓝色，当输入框内容改变时把输入框里的文字小写变为大写，当输入框失去焦点时去掉边框蓝色，控制台展示输入框里的文字</h2>
+            <input class="inp" type="text">
+        </div>
+        <div>
+            <h2>当选择 select 后，获取用户选择的内容</h2>
+            <select name="sports" id="opt">
+                <option value="football">football</option>
+				<option value="basketball">basketball</option>
+				<option value="swimming">swimming</option>
+				<option value="volleyball">volleyball</option>
+				<option value="gymnastics">gymnastics</option>
+            </select>
+            <p>当前选择:<span></span></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(".btn").on("click", function() {
+            $(this).css({
+                "background-color": "red",
+            });
+            setTimeout(function() {
+                $(".btn").css("background-color", "blue");
+            }, 1000);
+        });
+        $(window).on("scroll", function() {
+            $(".box span").text($(window).scrollTop() + "px");
+        })
+        $(".div1").on("mouseenter", function() {
+            $(this).css("background-color", "red");
+        });
+        $(".div1").on("mouseleave", function() {
+            $(this).css("background-color", "#fff");
+        });
+        $(".inp").focus(function() {
+            $(this).css("outline-color", "blue");
+        });
+        $(".inp").keyup(function() {
+            $(this).val($(this).val().toUpperCase());
+        });
+        $(".inp").blur(function() {
+            console.log($(this).val());
+        });
+        $("#opt").on("change", function() {
+            $("#opt+p>span").text($("option:selected").val());
+        })
+    </script>
+
+
+</body>
+
+</html>
