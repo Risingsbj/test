@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片懒加载</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .ct {
+            width: 835px;
+            margin: 100px auto;
+        }
+        
+        .list {
+            margin-left: -50px;
+        }
+        
+        .list li {
+            float: left;
+            margin-left: 50px;
+            margin-bottom: 40px;
+        }
+        
+        .clearfix::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        
+        .list>li a {
+            display: block;
+            width: 240px;
+            height: 185px;
+        }
+        
+        .list>li img {
+            width: 245px;
+            height: 185px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ct ">
+        <ul class="list clearfix">
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120609/133925KD492Z-3V62_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120609/133925K6133310-23606_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120609/133925K30T140-15964_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120609/133925K05M640-545K_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120609/133925Jc93330-45549_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120609/133925JW5960-350H_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120609/133925JQHN0-223Z_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120608/133ZZ063144F-55445_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120608/133ZYV2R940-12333_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120608/133ZYZY0540-12931_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120608/133ZYY51920-5UC_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120608/133ZYXS3620-45358_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/artGallery/080411/1_080411232640_1.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/Painting/c110616/130R3093095050-5b50_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/artGallery/110530/1-1105300045420-L.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/allimg/110227/1_110227161831_1.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/artGallery/c110607/130J5J2UY30-32445_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/Painting/c110616/130R3093095050-5b50_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/artGallery/c110609/130L2F9139440-1H17_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/allimg/110331/1_110331115451_1.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/allimg/110310/1_110310174156_1.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/Painting2/c110708/13100D534941F-51635_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/110327/1_110327144356_1.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://367art.net/uploads/allimg/c070330/11K223O135160-11122_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/110629/1-11062Z03330J2.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allimg/c120608/133ZY91Y10P-26437_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/allpaintings/c120111/13262W300C640-32J3_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://www.367art.net/uploads/artGallery/c110516/130553503333I0-2Y50_lit.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://e.367art.net/file/2008.11/102035585153.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://e.367art.net/file/2008.11/102036025851.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://e.shijieminghua.com/file/2008.11/201236395669.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://e.shijieminghua.com/file/2008.11/122207229437.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href=""><img src="http://i2.muimg.com/588926/40c84ba95544ac41.png" data-src="http://e.367art.net/file/2008.11/122207247822.jpg" alt=""></a>
+            </li>
+        </ul>
+    </div>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script>
+        checkImg();
+        $(window).on("scroll", checkImg);
+
+        function checkImg() {
+            $(".ct img").not(".loading").each(function() {
+                if (isVisible($(this))) {
+                    showImg($(this));
+                }
+            });
+        }
+
+        function isVisible($node) {
+            var windowHeight = $(window).height(),
+                scrollTop = $(window).scrollTop(),
+                offsetTop = $node.offset().top,
+                nodeHeight = $node.height();
+            if (windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function showImg($imgs) {
+            $imgs.each(function() {
+                var imgUrl = $(this).attr("data-src");
+                $(this).attr("src", imgUrl);
+                $(this).addClass("loading");
+            })
+        }
+    </script>
+
+</body>
+
+</html>
