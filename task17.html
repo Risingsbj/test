@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .banner {
+            margin: 100px auto;
+            width: 480px;
+            height: 360px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .banner .img {
+            width: 3000px;
+            position: absolute;
+            left: 0;
+        }
+        
+        .banner .img li {
+            float: left;
+        }
+        
+        .banner .num {
+            position: absolute;
+            width: 100%;
+            bottom: 10px;
+            text-align: center;
+            font-size: 0;
+        }
+        
+        .banner .num li {
+            width: 10px;
+            height: 10px;
+            background: #888;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 3px;
+            cursor: pointer;
+        }
+        
+        .banner .num .on {
+            background: #f60;
+        }
+        
+        .banner .btn {
+            width: 30px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            line-height: 50px;
+            text-align: center;
+            color: #FFF;
+            font-size: 40px;
+            cursor: pointer;
+            font-family: "宋体"
+        }
+        
+        .banner .left {
+            left: 0;
+        }
+        
+        .banner .right {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <ul class="img">
+            <li>
+                <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/15.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/16.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/17.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/18.jpg" alt=""></a>
+            </li>
+        </ul>
+
+        <ul class="num">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+
+        </ul>
+
+        <div class="btn left">&lt;</div>
+
+        <div class="btn right">&gt;</div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var i = 0;
+            var len = $(".banner .img li").length;
+            $(".banner .num li ").eq(0).addClass("on");
+            /*向左移动*/
+            $(".banner .left").click(function() {
+                i++;
+                if (i == len) {
+                    i = 0;
+                }
+                $(".banner .img").stop().animate({
+                    left: -i * 480
+                }, 500)
+                $(".banner .num li").eq(i).addClass("on").siblings().removeClass("on")
+            })
+
+            /*向右移动*/
+            $(".banner .right").click(function() {
+                i--;
+                if (i == -1) {
+                    i = len - 1;
+                }
+                $(".banner .img").stop().animate({
+                    left: -i * 480
+                }, 500)
+                $(".banner .num li").eq(i).addClass("on").siblings().removeClass("on")
+            })
+        })
+    </script>
+</body>
+
+</html>

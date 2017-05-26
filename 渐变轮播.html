@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    ul {
+        list-style: none;
+    }
+    
+    .banner {
+        margin: 100px auto;
+        width: 480px;
+        height: 360px;
+        position: relative;
+    }
+    /*.banner .img li {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }*/
+    
+    .banner .img {
+        width: 480px;
+        height: 360px;
+    }
+    
+    .banner .img li {
+        position: absolute;
+        height: 360px;
+    }
+    
+    .img .back {
+        z-index: -1;
+    }
+    
+    .banner .num {
+        position: absolute;
+        width: 100%;
+        bottom: 10px;
+        text-align: center;
+        font-size: 0;
+        z-index: 100;
+    }
+    
+    .banner .num li {
+        width: 10px;
+        height: 10px;
+        background: #888;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 3px;
+        cursor: pointer;
+    }
+    
+    .banner .num .on {
+        background: #f60;
+    }
+    /*.banner .btn {
+        width: 30px;
+        height: 50px;
+        background: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 50%;
+        margin-top: -25px;
+        line-height: 50px;
+        text-align: center;
+        color: #FFF;
+        font-size: 40px;
+        cursor: pointer;
+        font-family: "宋体";
+        display: none;
+        z-index: 100;
+    }
+    
+    .banner:hover .btn {
+        display: block;
+    }
+    
+    .banner .left {
+        left: 0;
+    }
+    
+    .banner .right {
+        right: 0;
+    }*/
+</style>
+
+<body>
+    <div class="banner">
+        <ul class="img">
+            <li>
+                <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/15.jpg" alt=""></a>
+            </li>
+            <li class="back">
+                <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/16.jpg" alt=""></a>
+            </li>
+            <li class="back">
+                <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/17.jpg" alt=""></a>
+            </li>
+            <li class="back">
+                <a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/18.jpg" alt=""></a>
+            </li>
+        </ul>
+
+        <ul class="num">
+
+        </ul>
+
+        <!--<div class="btn left">&lt;</div>
+
+        <div class="btn right">&gt;</div>-->
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var index = 0;
+            var len = $(".banner .img li").length;
+            for (var j = 0; j < len; j++) {
+                $(".banner .num").append("<li></li>")
+            }
+            $(".banner .num li ").eq(0).addClass("on");
+            //滑动圆点改变内容	
+            $(".banner .num li").hover(function() {
+                clearInterval(MyTime);
+                index = $(this).index();
+                Show(index);
+            });
+            /*鼠标移入停止自动播放*/
+            $(".banner").hover(function() {
+                    clearInterval(MyTime)
+                }, function() {
+                    MyTime = setInterval(t, 2000);
+                })
+                /*自动轮播*/
+            var MyTime = setInterval(t, 2000);
+
+            function t() {
+                Show(index);
+                index++;
+                if (index == len) {
+                    index = 0;
+                }
+            }
+
+            function Show(i) {
+                $(".banner .img li").eq(i).fadeIn(500).siblings().fadeOut(500);
+                /*.animate({
+                    opacity: 1
+                }, 1000)
+                .css({
+                    "z-index": "1"
+                })
+                .siblings()
+                .animate({
+                    opacity: 0
+                }, 1000)
+                .css({
+                    "z-index": "0"
+                });*/
+                $(".banner .num li").eq(i).addClass("on").siblings().removeClass("on");
+            }
+        })
+    </script>
+</body>
+
+</html>
