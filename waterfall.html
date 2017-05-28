@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>瀑布流</title>
+    <style>
+        .content {
+            position: relative;
+        }
+        
+        .item {
+            position: absolute;
+            width: 200px;
+            margin-right: 10px;
+            margin-top: 10px;
+            transition: all 1s;
+        }
+        
+        .h1 {
+            height: 150px;
+            background-color: red;
+        }
+        
+        .h2 {
+            height: 200px;
+            background-color: blue;
+        }
+        
+        .h3 {
+            height: 300px;
+            background-color: yellow;
+        }
+        
+        .h4 {
+            height: 400px;
+            background-color: orchid;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="item h1">1</div>
+        <div class="item h2">2</div>
+        <div class="item h3">3</div>
+        <div class="item h4">4</div>
+        <div class="item h1">5</div>
+        <div class="item h2">6</div>
+        <div class="item h3">7</div>
+        <div class="item h4">8</div>
+        <div class="item h1">9</div>
+        <div class="item h2">10</div>
+        <div class="item h3">11</div>
+        <div class="item h4">12</div>
+        <div class="item h1">13</div>
+        <div class="item h2">14</div>
+        <div class="item h3">15</div>
+        <div class="item h4">16</div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function waterFall() {
+            var colLength = parseInt($(window).width() / $(".item").outerWidth(true)),
+                itemArr = [];
+
+            for (var i = 0; i < colLength; i++) {
+                itemArr[i] = 0
+            }
+            $(".item").each(function() {
+                var $cur = $(this)
+                var minValue = Math.min.apply(null, itemArr)
+                var minIndex = itemArr.indexOf(minValue)
+                $cur.css({
+                    left: $cur.outerWidth(true) * minIndex,
+                    top: itemArr[minIndex]
+                });
+                itemArr[minIndex] += $cur.outerHeight(true)
+
+                /*    indx = 0,
+                    minitemArr = itemArr[0];
+                for (var j = 0; j < itemArr.length; j++) {
+                    if (itemArr[j] < minitemArr) {
+                        minitemArr = itemArr[j];
+                        indx = j;
+                    }
+                }
+
+                $cur.css({
+                    "left": indx * $cur.outerWidth(true),
+                    "top": minitemArr
+                });
+                itemArr[indx] = minitemArr + $cur.outerHeight(true);*/
+            })
+
+        }
+
+        waterFall();
+
+        $(window).on("resize", function() {
+            waterFall()
+        })
+    </script>
+</body>
+
+</html>
