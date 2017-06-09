@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .img-preview {
+            width: 1200px;
+            margin: 8px auto;
+        }
+        
+        .img-row {
+            margin-bottom: 10px;
+        }
+        
+        .img-row:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        
+        .img-box {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="img-preview"></div>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function Barrels($ct) {
+            this.$ct = $ct;
+            this.imgNum = 40; //图片数量
+            this.baseHeight = 100; //基础高度
+            this.rowList = []; //空数组，通过循环数组获取图片的总宽度
+            this.loadImg();
+
+        }
+        //1.当图片加载进来时，初始化new的image对象，在给定图片一个高度时；获取等比例下的宽度；
+        Barrels.prototype = {
+            loadImg: function() {
+                var _this = this; //保存作用域的this
+                var imgUrls = this.getImgUrls(100);
+                $.each(imgUrls, function(idx, url) {
+                    var img = new Image(); //创建一个图片对象；
+                    img.src = url;
+                    img.onload = function() {
+                        var originWidth = img.width, //原始宽度
+                            originHeight = img.height, //原始高度
+                            ratio = originWidth / originHeight; //宽高比
+
+                        var imgInfo = {
+                            target: $(img),
+                            width: _this.baseHeight * ratio,
+                            height: _this.baseHeight,
+                            ratio: ratio
+                        };
+                        _this.render(imgInfo);
+                    }
+                });
+            },
+
+            //2.把图片的宽高放入一个空数组，通过循环数组获取图片的总宽度；
+            render: function(imgInfo) {
+                var _this = this;
+                var rowList = this.rowList,
+                    rowWidth = 0, //图片总宽度初始化为0
+                    newRowHeight = 0,
+                    clientWidth = this.$ct.width(), //容器宽度
+                    lastImgInfo = imgInfo;
+
+                this.rowList.push(imgInfo);
+
+                $.each(rowList, function(idx, imgInfo) {
+                    rowWidth += imgInfo.width; //循环数组，得到图片的总宽度。
+                    /**将获取的总宽度跟容器宽度相比较，如果总宽度大于容器宽度，
+                     * 那就拿出最后一个图片的宽度，直到总宽度小于容器的宽度。
+                     * 然后拉伸容器里的图片让图片填充这个容器的宽度
+                     * （获取容器里现在的新高度）
+                     */
+                    if (rowWidth > clientWidth) {
+                        rowList.pop();
+                        rowWidth = rowWidth - lastImgInfo.width;
+                        newRowHeight = clientWidth * _this.baseHeight / rowWidth;
+
+                        _this.createRow(newRowHeight);
+                        //把数组清空，放入刚才被拿出的图片（重置数组总宽度）  
+                        _this.rowList = [];
+                        _this.rowList.push(lastImgInfo);
+                    }
+                });
+            },
+            //渲染每排图片（把新高度传入进去）
+            createRow: function(newRowHeight) {
+                var $rowCt = $('<div class="img-row"></div>');
+                $.each(this.rowList, function(idx, imgInfo) {
+                    var $imgCt = $('<div class="img-box"></div>'),
+                        $img = imgInfo.target;
+                    $img.height(newRowHeight);
+                    $imgCt.append($img);
+                    $rowCt.append($imgCt);
+                });
+                this.$ct.append($rowCt);
+            },
+            //获取图片：从http://placehold.it加载长宽随机的图片，把图片的url存在一个数组中
+            getImgUrls: function(num) {
+                var color, width, height, urls = [];
+                for (var i = 0; i < num; i++) {
+                    color = Math.random().toString(16).substring(2, 8);
+                    width = Math.floor(Math.random() * 100 + 50);
+                    height = Math.floor(Math.random() * 30 + 50);
+                    urls.push("http://placehold.it/" + width + "x" + height + "/" + color + "/fff");
+                }
+                return urls;
+            }
+
+        }
+
+
+        var barrels = new Barrels($('.img-preview'));
+    </script>
+
+</body>
+
+</html>
