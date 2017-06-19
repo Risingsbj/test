@@ -159,7 +159,8 @@
         </ul>
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script>
+
+    <!--<script>
         checkImg();
         $(window).on("scroll", checkImg);
 
@@ -190,7 +191,58 @@
                 $(this).addClass("loading");
             })
         }
+    </script>-->
+    <script>
+        function Exposure($target, callback) {
+            this.$target = $target;
+            this.callback = callback;
+            this.bind();
+            this.check();
+        }
+        Exposure.prototype.bind = function() {
+            var _this = this;
+            $(window).on('scroll', function() {
+                _this.check();
+            })
+        };
+        Exposure.prototype.check = function() {
+            if (this.isShow(this.$target)) {
+                this.callback(this.$target);
+            }
+        };
+        Exposure.prototype.isShow = function() {
+            var windowHeight = $(window).height(),
+                scrollTop = $(window).scrollTop(),
+                offsetTop = this.$target.offset().top,
+                nodeHeight = this.$target.height();
+            if (windowHeight + scrollTop > offsetTop && scrollTop < nodeHeight + offsetTop) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+        var Lazy = (function() {
+            return {
+                init: function($targets, callback) {
+                    $targets.each(function(idx, target) {
+                        new Exposure($(target), callback);
+                    })
+                },
+                one: function($targets, callback) {
+
+                }
+            }
+        })();
+        Lazy.init($('.list img'), function($node) {
+            showImg($node);
+        });
+
+        function showImg($img) {
+            var imgUrl = $img.attr('data-src');
+            $img.attr('src', imgUrl);
+        }
     </script>
+
 </body>
 
 </html>
